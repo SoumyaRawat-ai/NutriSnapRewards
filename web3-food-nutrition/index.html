@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriChain - Web3 Food Nutrition Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h2>🥗 NutriChain</h2>
+            </div>
+            <div class="navbar-nav">
+                <a href="#" class="nav-link" data-page="landing">Home</a>
+                <a href="#" class="nav-link" data-page="upload">Upload</a>
+                <a href="#" class="nav-link" data-page="credits">Credits</a>
+                <a href="#" class="nav-link" data-page="history">History</a>
+                <a href="#" class="nav-link" data-page="profile">Profile</a>
+                <button class="btn btn--primary connect-wallet-btn" id="connectWallet">
+                    <span class="wallet-status">Connect Wallet</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landing" class="page active">
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Revolutionize Your Nutrition with Web3</h1>
+                    <p class="hero-subtitle">Upload food images, get AI-powered nutrition analysis, and earn blockchain credits for healthy eating habits.</p>
+                    <div class="hero-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">📸</div>
+                            <h3>AI Food Recognition</h3>
+                            <p>Upload any food image and get instant nutrition analysis</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🧠</div>
+                            <h3>Smart Analytics</h3>
+                            <p>Track nutrition trends and get personalized insights</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💰</div>
+                            <h3>Earn Credits</h3>
+                            <p>Get rewarded with blockchain credits for healthy choices</p>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn btn--primary btn--lg" id="getStarted">Get Started</button>
+                        <button class="btn btn--outline btn--lg" data-page="upload">Try Demo</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/69790d5def4dd0600ce7fcffc265b88f/0094d8b7-5826-45d4-adef-3806bb5f7208/35d80dea.png" alt="Web3 Workflow" class="workflow-diagram">
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalUsers">12,847</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="imagesAnalyzed">45,923</div>
+                        <div class="stat-label">Images Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="creditsDistributed">892,456</div>
+                        <div class="stat-label">Credits Distributed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="foodsRecognized">3,421</div>
+                        <div class="stat-label">Foods Recognized</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Upload & Analysis Page -->
+    <div id="upload" class="page">
+        <div class="container">
+            <div class="upload-header">
+                <h1>Upload Food Image</h1>
+                <p>Take or upload a photo of your food to get detailed nutrition analysis</p>
+            </div>
+            
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📷</div>
+                        <h3>Drop your food image here</h3>
+                        <p>or click to browse files</p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-section" id="analysisSection" style="display: none;">
+                <div class="analysis-result">
+                    <div class="food-preview">
+                        <img id="foodImage" src="" alt="Uploaded food">
+                        <div class="food-info">
+                            <h2 id="foodName">Analyzing...</h2>
+                            <div class="confidence-score">
+                                <span>Confidence: </span>
+                                <span id="confidence">95%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nutrition-charts">
+                        <div class="chart-container">
+                            <h3>Macronutrients</h3>
+                            <canvas id="macroChart" height="300"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Nutritional Breakdown</h3>
+                            <canvas id="nutritionChart" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="nutrition-details" id="nutritionDetails">
+                        <!-- Nutrition facts will be populated here -->
+                    </div>
+
+                    <div class="credits-earned" id="creditsEarned" style="display: none;">
+                        <div class="credits-animation">
+                            <h3>🎉 Credits Earned!</h3>
+                            <div class="credits-amount">+<span id="earnedAmount">0</span> Credits</div>
+                            <p>Great choice! Your healthy eating is rewarded.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credits & Rewards Dashboard -->
+    <div id="credits" class="page">
+        <div class="container">
+            <div class="credits-header">
+                <h1>Credits & Rewards</h1>
+                <div class="balance-card">
+                    <div class="balance-amount">
+                        <span id="totalCredits">1,245</span>
+                        <small>Credits</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="credits-content">
+                <div class="credits-sidebar">
+                    <div class="earning-stats card">
+                        <h3>Earning Stats</h3>
+                        <div class="stat-item">
+                            <span>This Week</span>
+                            <span class="stat-value">+180</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>This Month</span>
+                            <span class="stat-value">+750</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Total Earned</span>
+                            <span class="stat-value">2,890</span>
+                        </div>
+                    </div>
+
+                    <div class="staking-card card">
+                        <h3>Staking Pool</h3>
+                        <p>Stake your credits to earn passive rewards</p>
+                        <div class="staking-info">
+                            <span>APY: 12%</span>
+                            <span>Min: 100 credits</span>
+                        </div>
+                        <button class="btn btn--primary btn--full-width">Stake Credits</button>
+                    </div>
+                </div>
+
+                <div class="marketplace">
+                    <h2>Rewards Marketplace</h2>
+                    <div class="marketplace-grid" id="marketplaceGrid">
+                        <!-- Marketplace items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food History & Tracking -->
+    <div id="history" class="page">
+        <div class="container">
+            <div class="history-header">
+                <h1>Food History & Tracking</h1>
+                <div class="date-selector">
+                    <button class="btn btn--outline" data-period="week">Week</button>
+                    <button class="btn btn--outline active" data-period="month">Month</button>
+                    <button class="btn btn--outline" data-period="year">Year</button>
+                </div>
+            </div>
+
+            <div class="tracking-dashboard">
+                <div class="nutrition-overview">
+                    <div class="goals-progress">
+                        <h3>Daily Goals Progress</h3>
+                        <div class="progress-grid">
+                            <div class="progress-item">
+                                <span>Calories</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                                <span>1500/2000</span>
+                            </div>
+                            <div class="progress-item">
+                                <span>Protein</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%"></div>
+                                </div>
+                                <span>90/150g</span>
+                            </div>
+                            <div class="progress-item">
+                                <span>Fiber</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                                <span>20/25g</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trends-chart">
+                        <h3>Nutrition Trends</h3>
+                        <canvas id="trendsChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="food-calendar">
+                    <h3>Food Calendar</h3>
+                    <div class="calendar-grid" id="foodCalendar">
+                        <!-- Calendar will be populated here -->
+                    </div>
+                </div>
+
+                <div class="food-log">
+                    <h3>Recent Foods</h3>
+                    <div class="food-log-list" id="foodLogList">
+                        <!-- Food log items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile & Wallet -->
+    <div id="profile" class="page">
+        <div class="container">
+            <div class="profile-header">
+                <h1>Profile & Settings</h1>
+            </div>
+
+            <div class="profile-content">
+                <div class="profile-sidebar">
+                    <div class="profile-card card">
+                        <div class="profile-avatar">👤</div>
+                        <h3 id="userName">John Doe</h3>
+                        <p id="userEmail">john@example.com</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span>Foods Logged</span>
+                                <span class="stat-value">127</span>
+                            </div>
+                            <div class="stat">
+                                <span>Credits Earned</span>
+                                <span class="stat-value">2,890</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wallet-card card">
+                        <h3>Wallet Status</h3>
+                        <div class="wallet-info">
+                            <div class="wallet-status connected" id="walletConnectionStatus">
+                                <span class="status-dot"></span>
+                                <span>Connected</span>
+                            </div>
+                            <div class="wallet-address" id="walletAddress">0x742d...3b2f</div>
+                        </div>
+                        <button class="btn btn--outline btn--full-width" id="disconnectWallet">Disconnect</button>
+                    </div>
+                </div>
+
+                <div class="profile-main">
+                    <div class="health-goals card">
+                        <h3>Health Goals</h3>
+                        <form id="goalsForm">
+                            <div class="form-group">
+                                <label class="form-label">Daily Calories Target</label>
+                                <input type="number" class="form-control" value="2000" id="caloriesGoal">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Protein Goal (g)</label>
+                                <input type="number" class="form-control" value="150" id="proteinGoal">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Activity Level</label>
+                                <select class="form-control" id="activityLevel">
+                                    <option value="sedentary">Sedentary</option>
+                                    <option value="light" selected>Lightly Active</option>
+                                    <option value="moderate">Moderately Active</option>
+                                    <option value="very">Very Active</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn--primary">Save Goals</button>
+                        </form>
+                    </div>
+
+                    <div class="transaction-history card">
+                        <h3>Transaction History</h3>
+                        <div class="transaction-list" id="transactionList">
+                            <!-- Transactions will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analyzing your food...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
