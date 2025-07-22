@@ -1,3 +1,4 @@
+```
 nutrisnap-rewards/
 ├── ai-model/             # Food recognition & nutrition code
 ├── backend/              # ICP smart contracts, Rust/Motoko code
@@ -6,7 +7,7 @@ nutrisnap-rewards/
 ├── assets/               # Logos, images
 ├── .gitignore
 └── README.md
-
+```
 # NutriSnapRewards
 
 AI-powered Web3 platform for food photo nutrition analysis and healthy eating rewards.  
@@ -48,11 +49,12 @@ If your project is on GitHub, run:
 git clone https://github.com/yourorg/nutrisnap-rewards.git
 cd nutrisnap-rewards
 ```
+```
 nutrisnap-rewards/
 ├── index.html
 ├── style.css
 └── script.js
-
+```
 With VSCode Live Server Extension:
 Open folder in VSCode → Right-click index.html → “Open with Live Server”.
 
