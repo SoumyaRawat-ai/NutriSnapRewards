@@ -40,9 +40,23 @@ docs/ # Technical & user documentation
 - (Add/remove as needed)
 
 ## 📝 How to Run
+Clone or Download the Repository
 
-_Coming Soon: setup instructions for cloning and running the project locally._
+If your project is on GitHub, run:
 
+```
+git clone https://github.com/yourorg/nutrisnap-rewards.git
+cd nutrisnap-rewards
+```
+nutrisnap-rewards/
+├── index.html
+├── style.css
+└── script.js
+
+With VSCode Live Server Extension:
+Open folder in VSCode → Right-click index.html → “Open with Live Server”.
+
+___
 ## 📄 License
 
 MIT License
