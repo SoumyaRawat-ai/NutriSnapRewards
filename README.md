@@ -38,7 +38,6 @@ docs/ # Technical & user documentation
 
 - Soumya Rawat | [Discord or GitHub]
 -  | [Discord or GitHub]
-- (Add/remove as needed)
 
 ## 📝 How to Run
 Clone or Download the Repository
